@@ -382,7 +382,7 @@ def prepare_image_request(request_body: Dict[str, Any], model: str) -> Dict[str,
     request_body["requestType"] = "image_gen"
     request_body["model"] = "gemini-3-pro-image"  # 统一使用基础模型名
     request_body["request"]["generationConfig"] = {"candidateCount": 1, "imageConfig": image_config}
-    for key in ("systemInstruction", "tools", "toolConfig"):
+    for key in ("systemInstruction", "system_instruction", "tools", "toolConfig"):
         request_body["request"].pop(key, None)
     return request_body
 
@@ -1121,6 +1121,9 @@ async def gemini_generate_content(
     system_instruction = None
     if "systemInstruction" in request_data:
         system_instruction = request_data["systemInstruction"]
+    
+    elif "system_instruction" in request_data:
+        system_instruction = request_data["system_instruction"]
 
     # 处理 tools
     antigravity_tools = None
@@ -1238,6 +1241,8 @@ async def gemini_stream_generate_content(
     system_instruction = None
     if "systemInstruction" in request_data:
         system_instruction = request_data["systemInstruction"]
+    elif "system_instruction" in request_data:
+        system_instruction = request_data["system_instruction"]
 
     # 处理 tools
     antigravity_tools = None
