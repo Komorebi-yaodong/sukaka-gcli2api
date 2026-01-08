@@ -188,6 +188,7 @@ def is_mobile_user_agent(user_agent: str) -> bool:
     return any(keyword in user_agent_lower for keyword in mobile_keywords)
 
 
+@router.head("/", response_class=HTMLResponse)
 @router.get("/", response_class=HTMLResponse)
 async def serve_control_panel(request: Request):
     """提供统一控制面板"""

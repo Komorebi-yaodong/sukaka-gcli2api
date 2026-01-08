@@ -97,3 +97,8 @@ log.txt
 *.bak
 
 tools/
+
+
+# vibe code
+summary.py
+result.txt
